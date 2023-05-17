@@ -85,7 +85,7 @@
     <script>
 
         async function run() {
-            const apiKey = document.querySelector('api').getAttribute('key');
+            const apiKey = document.querySelector('#apikey').value;
             const apiUrl = `https://api.benzinga.com/api/v2/news?pageSize=10&displayOutput=headline&token=${apiKey}`
 
             let resp = await fetch(apiUrl, {
@@ -155,7 +155,7 @@
 </head>
 
 <body>
-    <api key='<%- apikey %>'></api>
+    <input type="hidden" id ='apikey' value='<%- apikey %>'></api>
     <div id="master-container">
         <p class="master-title">Financial News</p>
         <hr style="margin-left: 20px; margin-right: 20px;">
@@ -174,10 +174,7 @@
         </fieldset>
     </form>
 
-    <form method="post" action="/watchlist">
-        <input type="Submit" value="Display Watchlist">
-    </form>
-
+    <h2><a href="/watchlist">Click here to display watchlist</a></h2>
 
 </body>
 

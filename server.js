@@ -45,7 +45,7 @@ app.post('/sendwatchlist', async(req, res) => {
 })
 
 
-app.post('/watchlist', async (req, res) => {
+app.get('/watchlist', async (req, res) => {
   
     await client.connect();
     let filter = {};
