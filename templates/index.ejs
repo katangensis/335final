@@ -107,7 +107,7 @@
                 div_img.className = "news-image"
                 var img = document.createElement("img")
 
-                if (article.image.length > 0) {
+                if (article.image && article.image.length > 0) {
                     img.src = article.image[0].url
                 } else {
                     img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Blank_globe.svg/2048px-Blank_globe.svg.png"
