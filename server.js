@@ -9,6 +9,7 @@ const userName = process.env.MONGO_DB_USERNAME;
 const password = process.env.MONGO_DB_PASSWORD;
 const mdatabaseName = process.env.MONGO_DB_NAME;
 const mcollection = process.env.MONGO_COLLECTION;
+const apikey = process.env.API_KEY;
 const portNumber = 5001
 
 const databaseAndCollection = {db: mdatabaseName, collection: mcollection};
@@ -25,7 +26,7 @@ app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
-	res.render("index")
+	res.render("index",  {apikey})
 })
 
 app.post('/sendwatchlist', async(req, res) => {
@@ -67,7 +68,8 @@ app.post('/watchlist', async (req, res) => {
     
 
     results.forEach(elem => {
-        stocksTable += `<tr><td>${elem.ticker}</td></tr>`
+        let link = `<a href='https://www.tradingview.com/symbols/${elem.ticker}'>${elem.ticker} &#10140;</a>`
+        stocksTable += `<tr><td>${link}</td></tr>`
     })
 
     stocksTable += "</table>"

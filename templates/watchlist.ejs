@@ -5,6 +5,82 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Watchlist</title>
+
+	<style>
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		table th,
+		table td {
+			padding: 12px 15px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		table th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+		}
+
+		table tbody tr:hover {
+			background-color: #f9f9f9;
+		}
+
+		table tbody tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		table td {
+			vertical-align: middle;
+		}
+
+		/* Optional: Add additional styles to enhance the design */
+
+		table {
+			font-family: Arial, sans-serif;
+		}
+
+		table th {
+			text-transform: uppercase;
+			font-size: 12px;
+			color: #555;
+		}
+
+		table td {
+			font-size: 14px;
+			color: #333;
+		}
+
+		/* Example styles for a striped table */
+		table.striped {
+			background-color: #f9f9f9;
+		}
+
+		table.striped tbody tr:nth-child(even) {
+			background-color: #fff;
+		}
+
+		/* Example styles for a bordered table */
+		table.bordered {
+			border: 1px solid #ddd;
+		}
+
+		table.bordered th,
+		table.bordered td {
+			border: 1px solid #ddd;
+		}
+
+		/* Example styles for a table with hover effect */
+		table.hover {
+			transition: background-color 0.3s ease;
+		}
+
+		table.hover tbody tr:hover {
+			background-color: #f5f5f5;
+		}
+	</style>
 </head>
 
 <body>
@@ -13,7 +89,7 @@
 		<%- stocksTable %>
 	</div>
 
-    <hr>
+	<hr>
 </body>
 
 </html>
