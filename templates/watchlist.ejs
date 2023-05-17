@@ -87,11 +87,18 @@
 </head>
 
 <body>
+	<h5><a href="/">Return Home</a></h5>
 	<h1>Our Global Watchlist</h1>
 	<div>
 		<%- stocksTable %>
 	</div>
 	<hr>
+
+    <form method="get" action="/clear">
+        <fieldset>
+            <input type="Submit" value="Clear List">
+        </fieldset>
+    </form>
 </body>
 
 </html>

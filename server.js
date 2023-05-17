@@ -26,7 +26,7 @@ app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
-	res.render("index",  {apikey})
+	res.render("index", {apikey})
 })
 
 app.post('/sendwatchlist', async(req, res) => {
@@ -41,7 +41,7 @@ app.post('/sendwatchlist', async(req, res) => {
     const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(newStock);
     console.log(`Application entry created with id ${result.insertedId}`);
 
-    res.render("index")
+    res.render("index", {apikey})
 })
 
 
@@ -68,7 +68,7 @@ app.get('/watchlist', async (req, res) => {
     
 
     results.forEach(elem => {
-        let link = `<a href='https://www.tradingview.com/symbols/${elem.ticker}'>${elem.ticker} &#10140;</a>`
+        let link = `<a href='https://www.tradingview.com/symbols/${elem.ticker}' target='_blank'>${elem.ticker} &#10140;</a>`
         stocksTable += `<tr><td>${link}</td></tr>`
     })
 
@@ -78,6 +78,19 @@ app.get('/watchlist', async (req, res) => {
     }*/
 
     res.render('watchlist', {stocksTable})
+})
+
+
+app.get('/clear', async (req, res) => {
+  
+    await client.connect();
+
+    const cursor = await client.db(databaseAndCollection.db)
+    .collection(databaseAndCollection.collection).deleteMany({})
+
+    await client.close();
+
+    res.redirect("/watchlist")
 })
 
 app.listen(portNumber, () => {
