@@ -5,5 +5,5 @@ Samuel Bihinda - 116573559
 
 App Description - This app it a tool for stock trader and ethusiasts to get the latest stocks news as well as update a global stocks watchlist for all users.
 API links - https://www.benzinga.com/apis/cloud-product/stock-news-api/
-YouTube Demo Video - 
+YouTube Demo Video - https://youtu.be/wP0vLb4vU34
 Public Link: https://three35finalstockservice.onrender.com/
