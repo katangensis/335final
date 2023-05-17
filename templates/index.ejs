@@ -1,0 +1,165 @@
+<!-- DO NOT MODIFY THIS FILE -->
+<html>
+<head>
+    
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.master-title {
+    text-align: center;
+}
+#master-container {
+    background: linear-gradient(to right, #1a1919, #414141);
+    border-radius: 10px; /* Adjust as needed */
+    overflow: hidden; /* Ensures the background stays within the border */
+    color: white;
+    width: 100%;
+}
+
+#news-table {
+    overflow: hidden; /* Ensures the background stays within the border */
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.gray-out {
+    opacity: 20%;
+}
+
+.news-row {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+.news-image {
+    flex: 0 0 100px;
+    margin-right: 20px;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+.news-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+.news-content {
+    flex: 1;
+}
+.news-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+.news-excerpt {
+    margin-top: 10px;
+    font-size: 10px;
+}
+
+.headline {
+        color: inherit;
+        text-decoration: none;
+}
+
+.headline:hover {
+    color: #8E43F0; 
+    text-decoration: underline;
+}
+</style>
+
+<script>
+
+    async function run(){
+        const apiKey = '7ff775d07c2846178a4fe46e50c3b060';
+        const apiUrl = `https://api.benzinga.com/api/v2/news?pageSize=10&displayOutput=headline&token=${apiKey}`
+
+        let resp = await fetch(apiUrl, {
+            headers: {
+                'accept': 'application/json'
+            }
+        })
+        let json = await resp.json()
+        console.log(json)
+        json.forEach((article) => {
+            
+            var newsTable = document.getElementById("news-table");
+
+            var row = document.createElement("div");
+            row.className = "news-row"
+
+            //image in row
+            var div_img = document.createElement("div")
+            div_img.className = "news-image"
+            var img = document.createElement("img")
+
+            if(article.image.length > 0){
+                img.src = article.image[0].url
+            } else {
+                img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Blank_globe.svg/2048px-Blank_globe.svg.png"
+                img.className = "gray-out"
+            }
+            img.alt = "N/A"
+            div_img.appendChild(img)
+
+            //article details
+            var div_content = document.createElement("div")
+            div_content.className = "news-content"
+
+            var div_title = document.createElement("div")
+            div_title.className = "news-title"
+            //div_title.innerText = article.title
+            var headlineLink = document.createElement("a");
+            headlineLink.className = 'headline';
+            headlineLink.href = article.url;
+            headlineLink.textContent = article.title;
+            headlineLink.target = "_blank"
+            div_title.appendChild(headlineLink)
+
+
+            var div_excerpt = document.createElement("div")
+            div_excerpt.className = "news-excerpt"
+            div_excerpt.innerText = article.created.replace('-0400', '')
+            
+            
+            div_content.appendChild(div_title)
+            div_content.appendChild(div_excerpt)
+
+            row.appendChild(div_img)
+            row.appendChild(div_content)
+
+            newsTable.appendChild(row)
+            
+        })
+    }
+
+    
+    
+    run();
+</script>
+
+</head>
+<body>
+<div id="master-container">
+    <p class="master-title">Financial News</p>
+    <hr style="margin-left: 20px; margin-right: 20px;">
+    <div id="news-table">
+        <!-- Add more news articles as needed -->
+    </div>
+</div>
+<h3>Based on the news, let's add some stocks to our Global watchlist!</h3>
+
+<form method="post" action="/sendwatchlist">
+    <fieldset>
+        <legend>Watchlist Build Tool</legend>
+        <label for="ticker">Enter stock:</label>
+        <input name="ticker" type="text" id="ticker">
+        <input type="Submit" value="Add Stock">
+    </fieldset>
+</form>
+
+<form method="post" action="/watchlist">
+    <input type="Submit" value="Display Watchlist">
+</form>
+
+
+</body>
+</html>
