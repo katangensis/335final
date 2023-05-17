@@ -26,7 +26,6 @@ app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
-    console.log('API Key: ' + apikey )
 	res.render("index", {apikey})
 })
 
