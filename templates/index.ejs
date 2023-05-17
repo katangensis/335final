@@ -13,6 +13,10 @@
             font-family: 'Roboto', sans-serif;
         }
 
+        #apikey {
+            display: none;
+        }
+
         .master-title {
             text-align: center;
         }
@@ -85,7 +89,7 @@
     <script>
 
         async function run() {
-            const apiKey = document.querySelector('#apikey').value;
+            const apiKey = document.querySelector('#apikey').innerHTML;
             const apiUrl = `https://api.benzinga.com/api/v2/news?pageSize=10&displayOutput=headline&token=${apiKey}`
 
             let resp = await fetch(apiUrl, {
@@ -155,7 +159,7 @@
 </head>
 
 <body>
-    <input type="hidden" id ='apikey' value='<%- apikey %>'></api>
+    <p id ='apikey'><%- apikey %></api>
     <div id="master-container">
         <p class="master-title">Financial News</p>
         <hr style="margin-left: 20px; margin-right: 20px;">
